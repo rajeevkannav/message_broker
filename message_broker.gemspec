@@ -7,11 +7,11 @@ require "message_broker/version"
 Gem::Specification.new do |s|
   s.name        = "message_broker"
   s.version     = MessageBroker::VERSION
-  s.authors     = [""]
-  s.email       = [""]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of MessageBroker."
-  s.description = "TODO: Description of MessageBroker."
+  s.authors     = ['Rajeev Kannav Sharma', 'Praveen Kumar Sinha']
+  s.email       = ["rajeevsharma86@gmail.com"]
+  s.homepage    = ""
+  s.summary     = "MessageBroker: Preview emails in browser (rails engine)"
+  s.description = "MessageBroker"
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
