@@ -1,25 +1,25 @@
 <%= form_for(@activity) do |f| %>
-  <% if @activity.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+    <% if @activity.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
 
-      <ul>
-      <% @activity.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @activity.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name, class: "w3-input" %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :template_text %><br>
-    <%= f.text_area :template_text %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :template_text %><br>
+      <%= f.text_area :template_text, class: "w3-input", rows: 10 %>
+    </div>
+    <div class="actions">
+      <%= f.submit class: "w3-btn w3-khaki w3-border" %>
+    </div>
 <% end %>

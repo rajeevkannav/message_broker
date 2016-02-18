@@ -11,6 +11,7 @@ module MessageBroker
 
     # GET /activities/1
     def show
+      @email = Mail.new
     end
 
     # GET /activities/new
