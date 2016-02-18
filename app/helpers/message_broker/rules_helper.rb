@@ -2,7 +2,8 @@ module MessageBroker
   module RulesHelper
 
     def model_list
-      ActiveRecord::Base.descendants.map {|model| [model] unless model.to_s.include? 'MessageBroker::'}
+      # []
+      ActiveRecord::Base.descendants.map {|model| [model]}
     end
   end
 end

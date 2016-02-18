@@ -48,15 +48,20 @@ module MessageBroker
       redirect_to rules_url, notice: 'Rule was successfully destroyed.'
     end
 
-    private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_rule
-        @rule = Rule.find(params[:id])
-      end
+    def get_events
+      _klass_name = params[:ar_classname]
+      @events = _klass_name.constantize.public_instance_methods(false)
+    end
 
-      # Only allow a trusted parameter "white list" through.
-      def rule_params
-        params.require(:rule).permit(:target, :event, :activity_id)
-      end
+    private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_rule
+      @rule = Rule.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def rule_params
+      params.require(:rule).permit(:target, :event, :activity_id)
+    end
   end
 end

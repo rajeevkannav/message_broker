@@ -17,13 +17,29 @@
   </div>
   <div class="field">
     <%= f.label :event %><br>
-    <%= f.text_field :event %>
+    <%= f.select :event, []%>
   </div>
   <div class="field">
     <%= f.label :activity_id %><br>
-    <%= f.text_field :activity_id %>
+    <%= f.select :activity_id, MessageBroker::Activity.all.collect {|activity| [ activity.name, activity.id ] },
+                 { include_blank: false } %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+<script>
+
+    $(document).ready(function() {
+        return $("#rule_target").on("change", function() {
+            return $.ajax({
+                url: "<%= rules_get_events_url %>",
+                type: "GET",
+                dataType: "script",
+                data: {
+                    ar_classname: $('#rule_target option:selected').val()
+                }
+            });
+        });
+    });
+</script>
