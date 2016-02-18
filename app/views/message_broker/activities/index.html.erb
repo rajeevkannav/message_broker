@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Activities</h1>
+<h4>Activities</h4>
 
-<table>
+<table class="w3-table w3-bordered w3-striped w3-card-4" >
   <thead>
-    <tr>
+    <tr class="w3-blue">
       <th>Name</th>
       <th>Template text</th>
-      <th colspan="3"></th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
 
@@ -16,9 +16,10 @@
       <tr>
         <td><%= activity.name %></td>
         <td><%= activity.template_text %></td>
-        <td><%= link_to 'Show', activity %></td>
-        <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
-        <td><%= link_to 'Destroy', activity, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_material_icon_to(activity, 'lightbulb_outline') %></td>
+        <td><%= link_material_icon_to(edit_activity_path(activity), 'edit') %></td>
+        <td><%= link_to "#{content_tag :i, 'delete_forever', class: 'material-icons w3-xxlarge'}".html_safe, activity,
+                        method: :delete, data: {confirm: 'Are you sure?'} %></td>
       </tr>
     <% end %>
   </tbody>

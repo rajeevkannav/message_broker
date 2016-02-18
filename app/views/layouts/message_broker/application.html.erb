@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MessageBroker</title>
+  <title>MessageBroker Application</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag    "message_broker/application", media: "all" %>
+  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
   <%= javascript_include_tag "message_broker/application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= render 'message_broker/shared/header' %>
+<div class="w3-container">
 <%= yield %>
-
+</div>
 </body>
 </html>
