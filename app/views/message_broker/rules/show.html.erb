@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @rule.target %>
+</p>
+
+<p>
+  <strong>Event:</strong>
+  <%= @rule.event %>
+</p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @rule.activity %>
+</p>
+
+<%= link_to 'Edit', edit_rule_path(@rule) %> |
+<%= link_to 'Back', rules_path %>

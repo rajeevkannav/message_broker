@@ -1,4 +1,5 @@
 MessageBroker::Engine.routes.draw do
+  resources :rules
   get 'dashboard/dashboard'
 
   resources :activities
