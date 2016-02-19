@@ -63,5 +63,6 @@ module MessageBroker
     def rule_params
       params.require(:rule).permit(:target, :event, :activity_id)
     end
+
   end
 end
