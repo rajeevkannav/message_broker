@@ -1,5 +1,4 @@
 $('#rule_event').empty();
-$('#rule_event').append( $('<option>Select the Event</option>'));
 <% @events.each do |event| %>
 $('#rule_event').append($('<option><%= event %></option>'));
 <% end %>
