@@ -2,8 +2,10 @@ PATH
   remote: .
   specs:
     message_broker (0.0.1)
+      activerecord
       mail
       rails (~> 4.2.5.1)
+      wisper-activerecord
 
 GEM
   remote: https://rubygems.org/
@@ -100,6 +102,10 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    wisper (1.6.1)
+    wisper-activerecord (0.3.0)
+      activerecord (>= 3.0.0)
+      wisper (~> 1.3)
 
 PLATFORMS
   ruby
