@@ -4,6 +4,7 @@ module MessageBroker
   class RulesController < ApplicationController
 
     before_action :set_rule, only: [:destroy]
+
     def create
       @rule = Rule.new(rule_params)
     end
