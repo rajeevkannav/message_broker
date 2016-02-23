@@ -1,12 +1,7 @@
+<p id="notice"><%= notice %></p>
 <table class="w3-table w3-bordered w3-striped w3-card-4">
   <tbody id="rules">
-  <% if @rules.empty? %>
-      <tr>
-        <td><p id="notice"><%= notice %></p></td>
-      </tr>
-  <% else %>
-      <%= render partial: "message_broker/rules/rule", collection: @rules %>
-  <% end %>
+  <%= render partial: "message_broker/rules/rule", collection: @rules unless @rules.empty? %>
   </tbody>
 </table>
 

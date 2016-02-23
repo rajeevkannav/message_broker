@@ -1,19 +1,11 @@
 <%= form_for(@rule, remote: true) do |f| %>
-    <% if @rule.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@rule.errors.count, "error") %> prohibited this rule from being saved:</h2>
-          <ul>
-            <% @rule.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <div id="error_explanation"></div>
 
-    <%= f.label :target %><%= f.select :target, model_list, include_blank: true %>
-    <%= f.label :event %><%= f.select :event, [] %>
-    <%= f.label :activity_id %><%= f.select :activity_id, MessageBroker::Activity.all.collect { |activity| [activity.name, activity.id] },
-                                            {include_blank: false} %>
+    Do <%= f.select :activity_id, MessageBroker::Activity.all.collect { |activity| [activity.name, activity.id] },
+                    {include_blank: false} %>
+    On <%= f.select :target, model_list, include_blank: true %>
+    before <%= f.select :event, [] %>
+    on the lapse of 2 minutes.
     <%= f.submit 'Add Rule' %>
 <% end %>
 <script>

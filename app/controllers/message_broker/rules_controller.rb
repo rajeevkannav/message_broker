@@ -6,7 +6,6 @@ module MessageBroker
     before_action :set_rule, only: [:destroy]
     def create
       @rule = Rule.new(rule_params)
-      redirect_to root_path unless @rule.save
     end
 
     def destroy
