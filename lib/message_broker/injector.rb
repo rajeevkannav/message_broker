@@ -16,7 +16,7 @@ module MessageBroker
           define_model_callbacks im.to_sym # define all available callback methods
 
           ## define what need to done in callback action
-          [:before, :around, :after].each do |callback_t|
+          MessageBroker::CALLBACK_DURATION.each do |callback_t|
             define_method "#{callback_t}_#{im}" do |*args|
               p "#{callback_t}_#{im}"
             end
