@@ -1,9 +1,10 @@
 MessageBroker::Engine.routes.draw do
-  get 'rules/get_events'
-  resources :rules
+  resources :rules do
+    member do
+      post 'create'
+    end
+  end
 
-  get 'dashboard/dashboard'
-
-  resources :activities
+  get  'dashboard/resource_events'
   root to: "dashboard#dashboard"
 end

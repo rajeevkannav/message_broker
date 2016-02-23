@@ -25,7 +25,7 @@
                  { include_blank: false } %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Add Rule'%>
   </div>
 <% end %>
 <script>
@@ -33,7 +33,7 @@
     $(document).ready(function() {
         return $("#rule_target").on("change", function() {
             return $.ajax({
-                url: "<%= rules_get_events_url %>",
+                url: "<%= dashboard_resource_events_url %>",
                 type: "GET",
                 dataType: "script",
                 data: {

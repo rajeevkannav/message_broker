@@ -1,8 +1,5 @@
 require "active_record"
-require 'wisper'
-require 'wisper/publisher'
-require 'wisper/active_record'
-require "message_broker/auditor"
+require 'active_support/callbacks'
 require "message_broker/injector"
 require "message_broker/engine"
 
