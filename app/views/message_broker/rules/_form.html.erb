@@ -1,37 +1,25 @@
 <%= form_for(@rule, remote: true) do |f| %>
-  <% if @rule.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@rule.errors.count, "error") %> prohibited this rule from being saved:</h2>
+    <% if @rule.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@rule.errors.count, "error") %> prohibited this rule from being saved:</h2>
+          <ul>
+            <% @rule.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-      <ul>
-      <% @rule.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :target %><br>
-    <%= f.select :target, model_list, include_blank: true %>
-  </div>
-  <div class="field">
-    <%= f.label :event %><br>
-    <%= f.select :event, []%>
-  </div>
-  <div class="field">
-    <%= f.label :activity_id %><br>
-    <%= f.select :activity_id, MessageBroker::Activity.all.collect {|activity| [ activity.name, activity.id ] },
-                 { include_blank: false } %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Add Rule'%>
-  </div>
+    <%= f.label :target %><%= f.select :target, model_list, include_blank: true %>
+    <%= f.label :event %><%= f.select :event, [] %>
+    <%= f.label :activity_id %><%= f.select :activity_id, MessageBroker::Activity.all.collect { |activity| [activity.name, activity.id] },
+                                            {include_blank: false} %>
+    <%= f.submit 'Add Rule' %>
 <% end %>
 <script>
 
-    $(document).ready(function() {
-        return $("#rule_target").on("change", function() {
+    $(document).ready(function () {
+        return $("#rule_target").on("change", function () {
             return $.ajax({
                 url: "<%= dashboard_resource_events_url %>",
                 type: "GET",
