@@ -17,7 +17,7 @@ module MessageBroker
 
     # Only allow a trusted parameter "white list" through.
     def rule_params
-      params.require(:rule).permit(:target, :event, :activity_id)
+      params.require(:rule).permit(:target, :event, :activity_id, :callback_duration)
     end
 
     def set_rule

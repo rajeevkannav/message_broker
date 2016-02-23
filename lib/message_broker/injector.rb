@@ -18,7 +18,8 @@ module MessageBroker
           ## define what need to done in callback action
           MessageBroker::CALLBACK_DURATION.each do |callback_t|
             define_method "#{callback_t}_#{im}" do |*args|
-              p "#{callback_t}_#{im}"
+              @message_broker_rules = MessageBroker::Rule.where(target: self.class.to_s).where(event: im).where(callback_duration: callback_t)
+              puts "#{@message_broker_rules.count} rules found."
             end
           end
 
