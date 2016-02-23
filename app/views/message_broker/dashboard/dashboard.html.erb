@@ -1,25 +1,2 @@
-<% if @rules.empty? %>
-    Rules not avilable.
-<% else %>
-    <p id="notice"><%= notice %></p>
-    <h4>Listing Rules</h4>
-    <table class="w3-table w3-bordered w3-striped w3-card-4">
-      <thead>
-      <tr class="w3-blue">
-        <th>Target</th>
-        <th>Event</th>
-        <th>Activity</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @rules.each do |rule| %>
-          <tr>
-            <td><%= rule.target %></td>
-            <td><%= rule.event %></td>
-            <td><%= rule.activity.name %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
-<% end %>
-<%= render 'rule_form' %>
+Welcome to Message Broker Application
+<%= render partial: "message_broker/rules/index" %>

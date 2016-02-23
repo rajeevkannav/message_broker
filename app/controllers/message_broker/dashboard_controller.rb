@@ -6,6 +6,7 @@ module MessageBroker
     def dashboard
       @rules = Rule.all
       @rule = Rule.new
+      flash.now[:notice] = 'Rules not available.' if @rules.empty?
     end
 
     def resource_events
