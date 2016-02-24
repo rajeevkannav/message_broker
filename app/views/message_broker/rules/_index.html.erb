@@ -1,69 +1,10 @@
-<p id="notice"><%= notice %></p>
-<table class="w3-table w3-bordered w3-striped w3-card-4">
-  <tbody id="rules">
-  <%= render partial: "message_broker/rules/rule", collection: @rules unless @rules.empty? %>
-  </tbody>
-</table>
-<style>
-    body {
-        background-color: #FFFFFF;
-        width: 600px;
-        margin: 0 auto;
-        padding: 0;
-    }
+<div class="rule_index">
+  <div class="lines"></div>
+  <ul class="list">
+    <%= render partial: "message_broker/rules/rule", collection: @rules unless @rules.empty? %>
+  </ul>
 
-    h4 {
-        color: #cd0000;
-        font-size: 42px;
-        letter-spacing: -2px;
-        text-align: left;
-    }
-
-    .list {
-        font-size: 0.9375em;
-        font-weight: 400;
-        line-height: 1.5;
-        margin-bottom: 1em;
-    }
-
-    .list li {
-        font-size: 0.9375em;
-        font-weight: 400;
-        line-height: 1.5;
-        margin-bottom: 1em;
-        border-bottom: 1px dotted #ccc;
-        text-indent: 25px;
-        padding: 10px;
-        font-family: "Whitney SSm A","Whitney SSm B";
-    }
-
-
-    .lines {
-        border-left: 1px solid #ffaa9f;
-        border-right: 1px solid #ffaa9f;
-        width: 2px;
-        float: left;
-        height: 495px;
-        margin-left: 40px;
-    }
-
-</style>
-
-<div class="lines"></div>
-
-<ul class="list">
-  <li>Eat Breakfeast</li>
-  <li>Feed Pugsly, the cow</li>
-  <li>Sit Down</li>
-  <li>Eat lunch</li>
-  <li>Call mom</li>
-  <li>Tweet about feeding my cow, pugsly</li>
-  <li>Join a hangout in google+</li>
-  <li>Prepare Dinner</li>
-  <li>Eat Dinner</li>
-  <li>Get ready for bed</li>
-  <li>Go to bed</li>
-</ul>
-
-
+</div>
+<div class="error_div">
 <%= render 'message_broker/rules/form' %>
+</div>

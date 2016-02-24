@@ -1,26 +1,29 @@
 <%= form_for(@rule, remote: true) do |f| %>
     <div id="error_explanation"></div>
-
-    Do <%= f.select :activity_id, MessageBroker::Activity.all.collect { |activity| [activity.name, activity.id] },
+    <span>Do</span> <%= f.select :activity_id, MessageBroker::Activity.all.collect { |activity| [activity.name, activity.id] },
                     {include_blank: false} %>
-    On <%#= f.select :target, model_list, :prompt => "Target Class" %>
+    <span>On</span> <%= f.select :target, model_list, :prompt => "Target Class" %>
     <%= f.select :callback_duration, MessageBroker::CALLBACK_DURATION %>
-    <%= f.select :event, [] , :prompt => "Instance Method" %>
-    on the lapse of <%= f.select :lapse_magnitude, 1..99 %> <%= f.select :lapse_unit, MessageBroker::LAPSE_UNIT %>.
+    <%= f.select :event, [], :prompt => "Instance Method" %>
+    <span>On the lapse of</span> <%= f.select :lapse_magnitude, 1..99 %> <%= f.select :lapse_unit, MessageBroker::LAPSE_UNIT %>
     <%= f.submit 'Add Rule' %>
 <% end %>
 <script>
-
     $(document).ready(function () {
         return $("#rule_target").on("change", function () {
-            return $.ajax({
-                url: "<%= dashboard_resource_events_url %>",
-                type: "GET",
-                dataType: "script",
-                data: {
-                    ar_classname: $('#rule_target option:selected').val()
-                }
-            });
+            console.log()
+            if ($('#rule_target option:selected').val() != '') {
+                return $.ajax({
+                    url: "<%= dashboard_resource_events_url %>",
+                    type: "GET",
+                    dataType: "script",
+                    data: {
+                        ar_classname: $('#rule_target option:selected').val()
+                    }
+                });
+
+            }
         });
     });
+
 </script>
