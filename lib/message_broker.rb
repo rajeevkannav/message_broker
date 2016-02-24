@@ -3,10 +3,10 @@
 require 'jquery-rails'
   ## To Load AR classes and operate
 require 'active_record'
-  ## To have delay and Queue to Messaging Server
-require 'sidekiq'
   ## To email
 require 'mail'
+  ## To have delay and Queue to Messaging Server
+require 'sidekiq'
 ### Engine level dependency
   ## define constants
 require "message_broker/constants"

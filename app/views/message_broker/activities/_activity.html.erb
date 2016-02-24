@@ -1,0 +1,31 @@
+<li id="activity_<%= activity.id %> accordion">
+  <%= activity.name %>
+  <%= link_to "Preview Expand", 'javascript:;', class: "toggle" %> |
+  <%= link_to "Edit", edit_activity_path(activity) %> |
+  <%= link_to "Destroy", activity, method: :delete, remote: true %>
+
+  <div class="inner">
+    <header>
+      From default@from.com
+      To default@to.com
+      Subject Default subject
+    </header>
+    <%= activity.template_text %>
+  </div>
+
+</li>
+
+<script>
+    $('.toggle').click(function (e) {
+        $(".inner").hide(350);
+        var $this = $(this);
+        var inner = $this.parent().find(".inner")
+        if (inner.is(':visible')) {
+            jQuery(this).text('Preview Expand');
+        } else {
+            jQuery(this).text('Preview Collapse');
+        }
+        inner.slideToggle(350);
+        return false;
+    });
+</script>

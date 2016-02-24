@@ -22,19 +22,14 @@ module MessageBroker
               Mail.defaults do
                 delivery_method :smtp, address: "localhost", port: 1025
               end
+
               MessageBroker::Rule.where(target: self.class.to_s).where(event: im).where(callback_duration: callback_t).each do |mb_rule|
-                @object = mb_rule
-                puts "mb_rule.activity.template_text"
-                puts mb_rule.activity.template_text.to_s
-                template = ERB.new(mb_rule.activity.template_text.to_s)
-                puts "#{template.inspect} =="
-                puts "#{template.result()} =="
-                _mail = Mail.new
-                _mail.from = 'defaults@from.com'
-                _mail.to = 'defaults@to.com'
-                _mail.subject = 'default Subject'
-                _mail.body = template.result()
-                _mail.deliver
+                Mail.delay_for(30.seconds).deliver do
+                  from 'defaults@from.com'
+                  to 'defaults@to.com'
+                  subject 'default Subject'
+                  body ERB.new(mb_rule.activity.template_text.to_s).result(instance_eval { binding })
+                end
               end
             end
           end
@@ -142,3 +137,4 @@ end
 #   end
 #
 #
+

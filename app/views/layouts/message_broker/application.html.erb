@@ -13,7 +13,8 @@
 <body>
 <header>
   <%= link_to('Message::Broker::Rules', root_path) %> |
-  <%= link_to('Message::Broker::Activities', root_path) %>
+  <%= link_to('Message::Broker::Activities', activities_path) %>
+  <%#= link_to('Message::Broker::Activities', sidekiq_path) %>
 </header>
 <%= yield %>
 <footer>
