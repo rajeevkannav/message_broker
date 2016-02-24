@@ -3,7 +3,7 @@
 
     Do <%= f.select :activity_id, MessageBroker::Activity.all.collect { |activity| [activity.name, activity.id] },
                     {include_blank: false} %>
-    On <%= f.select :target, model_list, :prompt => "Target Class" %>
+    On <%#= f.select :target, model_list, :prompt => "Target Class" %>
     <%= f.select :callback_duration, MessageBroker::CALLBACK_DURATION %>
     <%= f.select :event, [] , :prompt => "Instance Method" %>
     on the lapse of <%= f.select :lapse_magnitude, 1..99 %> <%= f.select :lapse_unit, MessageBroker::LAPSE_UNIT %>.

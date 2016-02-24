@@ -18,8 +18,24 @@ module MessageBroker
           ## define what need to done in callback action
           MessageBroker::CALLBACK_DURATION.each do |callback_t|
             define_method "#{callback_t}_#{im}" do |*args|
-              @message_broker_rules = MessageBroker::Rule.where(target: self.class.to_s).where(event: im).where(callback_duration: callback_t)
-              puts "#{@message_broker_rules.count} rules found."
+
+              Mail.defaults do
+                delivery_method :smtp, address: "localhost", port: 1025
+              end
+              MessageBroker::Rule.where(target: self.class.to_s).where(event: im).where(callback_duration: callback_t).each do |mb_rule|
+                @object = mb_rule
+                puts "mb_rule.activity.template_text"
+                puts mb_rule.activity.template_text.to_s
+                template = ERB.new(mb_rule.activity.template_text.to_s)
+                puts "#{template.inspect} =="
+                puts "#{template.result()} =="
+                _mail = Mail.new
+                _mail.from = 'defaults@from.com'
+                _mail.to = 'defaults@to.com'
+                _mail.subject = 'default Subject'
+                _mail.body = template.result()
+                _mail.deliver
+              end
             end
           end
 

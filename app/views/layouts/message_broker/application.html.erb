@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <title>MessageBroker Application</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= stylesheet_link_tag    "message_broker/application", media: "all" %>
-  <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+  <link href='https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700,300' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag "message_broker/application", media: "all" %>
   <%= javascript_include_tag "message_broker/application" %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
-<%= render 'message_broker/shared/header' %>
-<div class="w3-container">
+<header>
+  <%= link_to('Message::Broker::Rules', root_path) %> |
+  <%= link_to('Message::Broker::Activities', root_path) %>
+</header>
 <%= yield %>
-</div>
+<footer>
+  Developed at <%= link_to('Headerlabs', 'http://www.headerlabs.com/') %>
+  developed by <%= link_to 'Rajeev Kannav Sharma', 'http://rajeevkannav.github.io/' %>
+  authored by <%= link_to 'Praveen Kumar Sinha', 'http://anaphoral.blogspot.in/' %>
+  and code licensed under <%= link_to('MIT', 'https://opensource.org/licenses/MIT') %>.
+</footer>
+
 </body>
 </html>
