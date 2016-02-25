@@ -11,7 +11,9 @@ module MessageBroker
 
     # GET /activities/1
     def show
-      @email = Mail.new
+      # @email = Mail.new
+      render text: @activity.template, layout: false
+
     end
 
     # GET /activities/new
@@ -50,14 +52,24 @@ module MessageBroker
     end
 
     private
-      # Use callbacks to share common setup or constraints between actions.
-      def set_activity
-        @activity = Activity.find(params[:id])
-      end
+    # Use callbacks to share common setup or constraints between actions.
+    def set_activity
+      @activity = Activity.find(params[:id])
+    end
 
-      # Only allow a trusted parameter "white list" through.
-      def activity_params
-        params.require(:activity).permit(:name, :template_text)
-      end
+    # Only allow a trusted parameter "white list" through.
+    def activity_params
+      params.require(:activity).permit(
+          :name,
+          :subject,
+          :template,
+          :from,
+          :to,
+          :bcc,
+          :cc
+      )
+    end
+
+
   end
 end

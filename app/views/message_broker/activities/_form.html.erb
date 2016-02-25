@@ -13,13 +13,35 @@
 
     <div class="field">
       <%= f.label :name %><br>
-      <%= f.text_field :name, class: "w3-input" %>
+      <%= f.text_field :name %>
     </div>
     <div class="field">
-      <%= f.label :template_text %><br>
-      <%= f.text_area :template_text, class: "w3-input", rows: 10 %>
+      <%= f.label :subject %><br>
+      <%= f.text_field :subject%>
     </div>
+
+    <div class="field">
+      <%= f.label :template %><br>
+      <%= f.text_area :template, rows: 20, column: 80 %>
+    </div>
+    <div class="field">
+      <%= f.label :to %><br>
+      <%= f.text_field :to %>
+    </div>
+    <div class="field">
+      <%= f.label :from %><br>
+      <%= f.text_field :from %>
+    </div>
+    <div class="field">
+      <%= f.label :cc %><br>
+      <%= f.text_field :cc %>
+    </div>
+    <div class="field">
+      <%= f.label :bcc %><br>
+      <%= f.text_field :bcc %>
+    </div>
+
     <div class="actions">
-      <%= f.submit class: "w3-btn w3-khaki w3-border" %>
+      <%= f.submit %>
     </div>
 <% end %>

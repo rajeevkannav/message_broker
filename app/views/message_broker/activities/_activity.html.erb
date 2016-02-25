@@ -1,4 +1,4 @@
-<li id="activity_<%= activity.id %> accordion">
+<li id="activity_<%= activity.id %> ">
   <%= activity.name %>
   <%= link_to "Preview Expand", 'javascript:;', class: "toggle" %> |
   <%= link_to "Edit", edit_activity_path(activity) %> |
@@ -6,11 +6,13 @@
 
   <div class="inner">
     <header>
-      From default@from.com
-      To default@to.com
-      Subject Default subject
+      From <%= activity.from %> |
+      To <%= activity.to %> |
+      Subject <%= activity.subject %> |
+      CC <%= activity.cc %> |
+      BCC <%= activity.bcc %> |
     </header>
-    <%= activity.template_text %>
+    <iframe class="maily_preview" onload='javascript:resizeIframe(this);' src="<%= activity_path(activity) %>" frameborder="1" height="400" width="100%"></iframe>
   </div>
 
 </li>
