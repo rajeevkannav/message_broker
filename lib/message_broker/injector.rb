@@ -24,11 +24,17 @@ module MessageBroker
               end
 
               MessageBroker::Rule.where(target: self.class.to_s).where(event: im).where(callback_duration: callback_t).each do |mb_rule|
-                Mail.delay_for(30.seconds).deliver do
-                  from 'defaults@from.com'
-                  to 'defaults@to.com'
-                  subject 'default Subject'
+
+                Mail.delay_for(
+                    eval("#{mb_rule.lapse_magnitude}.#{mb_rule.lapse_unit}"),
+                    :queue => MessageBroker::QUEUE_NAME,
+                    :retry => MessageBroker::RETRY_MAILS
+                ).deliver do
+                  to 'to@headerlabs.com'
+                  from 'from@headerlabs.com'
+                  subject  'mb_rule.activity.subject'
                   body ERB.new(mb_rule.activity.template_text.to_s).result(instance_eval { binding })
+
                 end
               end
             end
