@@ -11,9 +11,7 @@ module MessageBroker
 
     # GET /activities/1
     def show
-      # @email = Mail.new
       render text: @activity.template, layout: false
-
     end
 
     # GET /activities/new
@@ -30,7 +28,7 @@ module MessageBroker
       @activity = Activity.new(activity_params)
 
       if @activity.save
-        redirect_to @activity, notice: 'Activity was successfully created.'
+        redirect_to activities_path, notice: 'Activity was successfully created.'
       else
         render :new
       end
@@ -39,7 +37,7 @@ module MessageBroker
     # PATCH/PUT /activities/1
     def update
       if @activity.update(activity_params)
-        redirect_to @activity, notice: 'Activity was successfully updated.'
+        redirect_to activities_path, notice: 'Activity was successfully updated.'
       else
         render :edit
       end
@@ -48,7 +46,6 @@ module MessageBroker
     # DELETE /activities/1
     def destroy
       @activity.destroy
-      redirect_to activities_url, notice: 'Activity was successfully destroyed.'
     end
 
     private
