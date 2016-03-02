@@ -1,4 +1,4 @@
-<li id="activity_<%= activity.id %> ">
+<li id="activity_<%= activity.id %>">
   <%= activity.name %>
   <%= link_to "Preview Expand", 'javascript:;', class: "toggle" %> |
   <%= link_to "Edit", edit_activity_path(activity) %> |
@@ -12,22 +12,20 @@
       CC <%= activity.cc %> |
       BCC <%= activity.bcc %> |
     </header>
-    <iframe class="maily_preview" onload='javascript:resizeIframe(this);' src="<%= activity_path(activity) %>" frameborder="1" height="400" width="100%"></iframe>
+    <iframe class="maily_preview" src="<%= activity_path(activity) %>" frameborder="1" height="400" width="100%"></iframe>
   </div>
 
 </li>
 
 <script>
-    $('.toggle').click(function (e) {
-        $(".inner").hide(350);
-        var $this = $(this);
-        var inner = $this.parent().find(".inner")
-        if (inner.is(':visible')) {
-            jQuery(this).text('Preview Expand');
-        } else {
-            jQuery(this).text('Preview Collapse');
-        }
-        inner.slideToggle(350);
-        return false;
-    });
+    $('.toggle').on('click', function () {
+        var _link = $(this)
+        $(this).nextUntil(".toggle").filter('.inner').slideToggle(450, function () {
+            if (_link.nextUntil('.toggle').filter('.inner').is(':visible')) {
+                _link.text('Preview Collapse')
+            } else {
+                _link.text('Preview Expand')
+            }
+        });
+    })
 </script>
