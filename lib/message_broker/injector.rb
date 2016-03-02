@@ -34,15 +34,12 @@ module MessageBroker
 
       MessageBroker::Rule.where(target: self.class.to_s).where(event: event).where(callback_duration: callback_t).each do |mb_rule|
 
-        ActionMailer::Base.mail(from: mb_rule.activity.from,
-                                to: mb_rule.activity.to,
-                                subject: mb_rule.activity.subject,
-                                body: ERB.new(mb_rule.activity.template.to_s).result(instance_eval { binding }) ).deliver_later(wait: eval("#{mb_rule.lapse_magnitude}.#{mb_rule.lapse_unit}"))
-
-        ActionMailer::Base.mail(from: mb_rule.activity.from,
-                                to: mb_rule.activity.to,
-                                subject: mb_rule.activity.subject,
-                                body: ERB.new(mb_rule.activity.template.to_s).result(instance_eval { binding }) ).deliver_now
+        ActionMailer::Base.mail(
+            from: mb_rule.activity.from,
+            to: mb_rule.activity.to,
+            subject: mb_rule.activity.subject,
+            body: ERB.new(mb_rule.activity.template.to_s).result(instance_eval { binding })
+        ).deliver_later(wait: eval("#{mb_rule.lapse_magnitude}.#{mb_rule.lapse_unit}"))
 
       end
     end

@@ -2,17 +2,31 @@
 
 respond to life cycle callbacks to implement trigger-like behavior. Simply drop-in the app and go!
 
-
 ## Installation
 
 1. add to your `Gemfile` ->  `'message_broker'`.
+    
+    * For every model
+        ##### Make a file message_broker.rb in Rails.root/config/initializers
+        Rails.application.eager_load!
+        ActiveRecord::Base.descendants.each do |descendant|
+        descendant.send(:include, MessageBroker::Injector)
+        end
+
+    * For selective Models
+        class ModelName < ActiveRecord::Base
+            include MessageBroker::Injector
+        end
 2. add this line to routes `mount MessageBroker::Engine => "/message_broker"`
 3. bundle install.
-4. append your Sidekiq.yml like this `:queues: - [mailers, 2]`.
-5. `rails s`
-6. Create some rules. checkout `http://localhost:3000/message_broker/`
-7. Create some activities checkout `http://localhost:3000/message_broker/activities`
-8. Play!
+4. append your sidekiq.yml like this
+    :queues:
+      - default
+      - [mailers, 2]
+5. (Re-)boot application and `rails s`
+6. Create some rules. checkout `/message_broker`
+7. Create some activities checkout `/message_broker/activities`
+8. Play safely(under-development)!
 
 
 
