@@ -31,8 +31,19 @@ module MessageBroker
     end
 
     def message_broker_adjustments(event, callback_t)
+
       MessageBroker::Rule.where(target: self.class.to_s).where(event: event).where(callback_duration: callback_t).each do |mb_rule|
-        puts "mb_rule #{mb_rule.inspect}"
+
+        ActionMailer::Base.mail(from: mb_rule.activity.from,
+                                to: mb_rule.activity.to,
+                                subject: mb_rule.activity.subject,
+                                body: ERB.new(mb_rule.activity.template.to_s).result(instance_eval { binding }) ).deliver_later(wait: eval("#{mb_rule.lapse_magnitude}.#{mb_rule.lapse_unit}"))
+
+        ActionMailer::Base.mail(from: mb_rule.activity.from,
+                                to: mb_rule.activity.to,
+                                subject: mb_rule.activity.subject,
+                                body: ERB.new(mb_rule.activity.template.to_s).result(instance_eval { binding }) ).deliver_now
+
       end
     end
 
