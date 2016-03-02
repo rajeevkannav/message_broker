@@ -5,13 +5,17 @@
   <%= link_to "Destroy", activity, method: :delete, remote: true %>
 
   <div class="inner">
-    <p class="hello">
-      From <%= activity.from %> |
-      To <%= activity.to %> |
-      Subject <%= activity.subject %> |
-      CC <%= activity.cc %> |
-      BCC <%= activity.bcc %> |
-    </p>
+    <div class="mail_meta">
+      <p><b>From</b> <%= activity.from %></p>
+
+      <p><b>To</b> <%= activity.to %></p>
+
+      <p><b>Subject</b> <%= activity.subject %></p>
+
+      <p><b>CC</b> <%= activity.cc %></p>
+
+      <p><b>BCC</b> <%= activity.bcc %></p>
+    </div>
     <iframe class="maily_preview" src="<%= activity_path(activity) %>" frameborder="1" height="400" width="100%"></iframe>
   </div>
 
