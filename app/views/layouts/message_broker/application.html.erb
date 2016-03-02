@@ -14,8 +14,8 @@
 <header>
   <%= link_to('Message::Broker::Rules', root_path) %> |
   <%= link_to('Message::Broker::Activities', activities_path) %>
-  <%#= link_to('Message::Broker::Activities', sidekiq_path) %>
 </header>
+<%= render :partial => "message_broker/shared/flash_messages", :locals => {:flash => flash} %>
 <%= yield %>
 <footer>
   Developed at <%= link_to('Headerlabs', 'http://www.headerlabs.com/') %>
