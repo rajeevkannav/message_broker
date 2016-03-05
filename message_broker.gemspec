@@ -18,10 +18,13 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.2.5.1"
-  s.add_dependency "jquery-rails", "~> 3.1.1"
   s.add_dependency "activerecord"
+  s.add_dependency "actionmailer"
+  s.add_dependency "jquery-rails", "~> 3.1.1"
+  s.add_dependency "bootstrap-sass", "~> 3.2.0"
+  s.add_dependency 'sass-rails'
+  s.add_dependency "autoprefixer-rails"
   s.add_dependency "sidekiq"
-  s.add_dependency "mail"
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency 'sinatra'
