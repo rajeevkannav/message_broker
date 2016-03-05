@@ -11,34 +11,34 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :name %><br>
-      <%= f.text_field :name %>
+    <div class="form-group col-md-6">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control', placeholder: 'Activity Name' %>
     </div>
-    <div class="field">
-      <%= f.label :subject %><br>
-      <%= f.text_field :subject %>
+    <div class="form-group col-md-6">
+      <%= f.label :subject %>
+      <%= f.text_field :subject, class: 'form-control', placeholder: 'Email Subject' %>
     </div>
 
-    <div class="field">
+    <div class="form-group">
       <%= f.label :template %><br>
-      <%= f.text_area :template, rows: 20, column: 80 %>
+      <%= f.text_area :template, class: 'form-control', placeholder: 'Email Content HTML Preferred' %>
     </div>
-    <div class="field">
+    <div class="form-group col-md-3">
       <%= f.label :to %><br>
-      <%= f.text_field :to %>
+      <%= f.text_field :to, class: 'form-control', placeholder: 'Receiver Email(s)' %>
     </div>
-    <div class="field">
+    <div class="form-group col-md-3">
       <%= f.label :from %><br>
-      <%= f.text_field :from %>
+      <%= f.text_field :from, class: 'form-control', placeholder: 'Sender Email' %>
     </div>
-    <div class="field">
+    <div class="form-group col-md-3">
       <%= f.label :cc %><br>
-      <%= f.text_field :cc %>
+      <%= f.text_field :cc, class: 'form-control', placeholder: 'CC To - Email(s)' %>
     </div>
-    <div class="field">
+    <div class="form-group col-md-3">
       <%= f.label :bcc %><br>
-      <%= f.text_field :bcc %>
+      <%= f.text_field :bcc, class: 'form-control', placeholder: 'BCC To - Email(s)' %>
     </div>
 
     <div class="actions">

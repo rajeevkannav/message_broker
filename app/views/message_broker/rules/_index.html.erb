@@ -1,10 +1,9 @@
-<div class="index">
-  <div class="lines"></div>
-  <ul class="list">
-    <%= render partial: "message_broker/rules/rule", collection: @rules unless @rules.empty? %>
-  </ul>
+<div class="row">
+  <div id="main-content" class="col-md-12">
+    <ul class="list-group inbox">
+      <%= render partial: "message_broker/rules/rule", collection: @rules unless @rules.empty? %>
+    </ul>
+    <%= render 'message_broker/rules/form' %>
+  </div>
+</div>
 
-</div>
-<div class="error_div">
-<%= render 'message_broker/rules/form' %>
-</div>

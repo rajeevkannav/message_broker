@@ -1,3 +1,6 @@
-<li id="rule_<%= rule.id %>">do <%= rule.activity.name %> on <%= rule.target %> <%= rule.callback_duration %>
-  <%= rule.event %> on the lapse of 2 minutes. <%= link_to "Destroy", rule, method: :delete, remote: true %>
+<li id='rule_<%= rule.id %>' class='list-group-item'>
+  do <%= rule.activity.name %> on <%= rule.target %> <%= rule.callback_duration %>
+  <%= rule.event %> on the lapse of <%= rule.lapse_magnitude %> <%= rule.lapse_unit %>.
+  <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), edit_rule_path(rule), remote: true %>
+  <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-trash'), rule, method: :delete, remote: true %>
 </li>

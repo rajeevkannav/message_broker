@@ -3,7 +3,7 @@
 require 'jquery-rails'
   ## To Load AR classes and operate
 require 'active_record'
-require 'bootstrap'
+require 'bootstrap-sass'
   ## To email
 require 'mail'
   ## To have delay and Queue to Messaging Server

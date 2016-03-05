@@ -6,7 +6,7 @@ class CreateMessageBrokerRules < ActiveRecord::Migration
       t.belongs_to :activity, index: true, foreign_key: true
       t.string :callback_duration
       t.integer :lapse_magnitude
-      t.integer :lapse_unit
+      t.string :lapse_unit
 
       t.timestamps null: false
     end
