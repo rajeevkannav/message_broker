@@ -2,6 +2,8 @@ require_dependency "message_broker/application_controller"
 
 module MessageBroker
   class ActivitiesController < ApplicationController
+
+    skip_before_filter :activity_comes_first, :only => [:new, :create]
     before_action :set_activity, only: [:show, :edit, :update, :destroy]
 
     # GET /activities

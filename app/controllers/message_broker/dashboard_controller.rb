@@ -4,7 +4,6 @@ module MessageBroker
   class DashboardController < ApplicationController
 
     def dashboard
-      redirect_to activities_path, :flash => {:error => "Please create an activity first."} if Activity.count.zero?
       @rules = Rule.all
       @rule = Rule.new
     end

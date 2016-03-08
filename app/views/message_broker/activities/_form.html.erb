@@ -1,47 +1,65 @@
-<%= form_for(@activity) do |f| %>
-    <% if @activity.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this activity from being saved:</h2>
+<div class="row">
+  <%= form_for @activity, :html => {class: 'form-horizontal'} do |f| %>
+      <%= render 'message_broker/shared/error_messages', object: @activity %>
 
-          <ul>
-            <% @activity.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
+      <div class="form-group">
+        <%= f.label :name, class: 'control-label col-sm-2' %>
+        <div class="col-sm-10">
+          <%= f.text_field :name, class: 'form-control col-sm-10', placeholder: 'Activity Name' %>
         </div>
-    <% end %>
+      </div>
 
-    <div class="form-group col-md-6">
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control', placeholder: 'Activity Name' %>
-    </div>
-    <div class="form-group col-md-6">
-      <%= f.label :subject %>
-      <%= f.text_field :subject, class: 'form-control', placeholder: 'Email Subject' %>
-    </div>
 
-    <div class="form-group">
-      <%= f.label :template %><br>
-      <%= f.text_area :template, class: 'form-control', placeholder: 'Email Content HTML Preferred' %>
-    </div>
-    <div class="form-group col-md-3">
-      <%= f.label :to %><br>
-      <%= f.text_field :to, class: 'form-control', placeholder: 'Receiver Email(s)' %>
-    </div>
-    <div class="form-group col-md-3">
-      <%= f.label :from %><br>
-      <%= f.text_field :from, class: 'form-control', placeholder: 'Sender Email' %>
-    </div>
-    <div class="form-group col-md-3">
-      <%= f.label :cc %><br>
-      <%= f.text_field :cc, class: 'form-control', placeholder: 'CC To - Email(s)' %>
-    </div>
-    <div class="form-group col-md-3">
-      <%= f.label :bcc %><br>
-      <%= f.text_field :bcc, class: 'form-control', placeholder: 'BCC To - Email(s)' %>
-    </div>
+      <div class="form-group">
+        <%= f.label :subject, class: 'control-label col-sm-2' %>
+        <div class="col-sm-10">
+          <%= f.text_field :subject, class: 'form-control col-sm-10', placeholder: 'Email Subject' %>
+        </div>
+      </div>
 
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-<% end %>
+      <div class="form-group">
+        <%= f.label :template, class: 'control-label col-sm-2' %>
+        <div class="col-sm-10">
+          <%= f.text_area :template, class: 'form-control col-sm-10', placeholder: 'Email Content HTML Preferred' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :to, class: 'control-label col-sm-2' %>
+        <div class="col-sm-10">
+          <%= f.text_field :to, class: 'form-control col-sm-10', placeholder: 'Receiver Email(s)' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :from, class: 'control-label col-sm-2' %>
+        <div class="col-sm-10">
+          <%= f.text_field :from, class: 'form-control col-sm-10', placeholder: 'Sender Email' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :cc, class: 'control-label col-sm-2' %>
+        <div class="col-sm-10">
+          <%= f.text_field :cc, class: 'form-control col-sm-10', placeholder: 'CC To - Email(s)' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :bcc, class: 'control-label col-sm-2' %>
+        <div class="col-sm-10">
+          <%= f.text_field :bcc, class: 'form-control col-sm-10', placeholder: 'BCC To - Email(s)' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2">
+          <%= f.submit class: 'btn btn-large btn-success' %>
+          <%= link_to 'Back', activities_path, class: 'btn btn-large btn-success' %>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+
+
