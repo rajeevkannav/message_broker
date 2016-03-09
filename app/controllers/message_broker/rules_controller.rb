@@ -4,9 +4,9 @@ module MessageBroker
   class RulesController < ApplicationController
 
     before_action :set_rule, only: [:edit, :destroy]
+    before_action :get_rules, only: [:index, :create]
 
     def index
-      @rules = Rule.all
       @rule = Rule.new
     end
 
@@ -30,6 +30,10 @@ module MessageBroker
 
     def set_rule
       @rule = Rule.find params[:id]
+    end
+
+    def get_rules
+      @rules = Rule.all
     end
 
   end
