@@ -3,14 +3,9 @@
     <h4>Available Rule Set</h4>
 
     <div id="rule-index">
-      <% if @rules.empty? %>
-          No rules available.
-      <% else %>
-          <%= render partial: "message_broker/rules/rules_list", locals: {rules: @rules} %>
-      <% end %>
+      <%= render partial: "message_broker/rules/rules_list", locals: {rules: @rules} %>
     </div>
 
-    <%= render 'message_broker/rules/form' %>
+    <%= render partial: 'message_broker/rules/form', locals: {rule: @rule} %>
   </div>
 </div>
-

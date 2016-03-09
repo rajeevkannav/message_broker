@@ -4,7 +4,7 @@ module MessageBroker
   class RulesController < ApplicationController
 
     before_action :set_rule, only: [:edit, :destroy]
-    before_action :get_rules, only: [:index, :create]
+    before_action :get_rules, only: [:index, :create, :destroy]
 
     def index
       @rule = Rule.new

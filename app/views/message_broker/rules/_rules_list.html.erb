@@ -1,3 +1,7 @@
-<ul class="list-group">
-  <%= render partial: "message_broker/rules/rule", collection: rules %>
-</ul>
+<% if rules.empty? %>
+    No rules available.
+<% else %>
+    <ul class="list-group">
+      <%= render partial: "message_broker/rules/rule", collection: rules %>
+    </ul>
+<% end %>

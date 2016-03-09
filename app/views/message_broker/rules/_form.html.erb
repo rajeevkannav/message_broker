@@ -1,29 +1,34 @@
 <%= form_for(@rule, remote: true) do |f| %>
     <div id="error_explanation"></div>
     <span>Do</span> <%= f.select :activity_id, MessageBroker::Activity.all.collect { |activity| [activity.name, activity.id] },
-                    {include_blank: false} %>
-    <span>On</span> <%= f.select :target, model_list, :prompt => "Target Class" %>
+                                 {include_blank: false} %>
+    <span>On</span>
+    <%= f.select :target, [], {:prompt => "Target Class"}, {class: 'rule_target'} %>
     <%= f.select :callback_duration, MessageBroker::CALLBACK_DURATION %>
-    <%= f.select :event, [], :prompt => "Instance Method" %>
+    <%= f.select :event, [], {:prompt => "Instance Method(s)"}, {class: 'rule_event'} %>
     <span>On the lapse of</span> <%= f.select :lapse_magnitude, 1..99 %> <%= f.select :lapse_unit, MessageBroker::LAPSE_UNIT %>
     <%= f.submit 'Add Rule' %>
 <% end %>
-<script>
-    $(document).ready(function () {
-        return $("#rule_target").on("change", function () {
-            console.log()
-            if ($('#rule_target option:selected').val() != '') {
-                return $.ajax({
-                    url: "<%= dashboard_resource_events_url %>",
-                    type: "GET",
-                    dataType: "script",
-                    data: {
-                        ar_classname: $('#rule_target option:selected').val()
-                    }
-                });
 
-            }
-        });
+
+<script>
+
+    var model_methods_json = <%= raw model_list.to_json %>;
+
+    $.each(model_methods_json, function (key, value) {
+        $('.rule_target').append($("<option></option>").attr("value", key).text(key));
     });
 
+    $('.rule_target').on('change', function () {
+        var val = $('.rule_target').val()
+        if (val == '') {
+            $('.rule_event').find('option').remove();
+            $('.rule_event').append('<option value="">Instance Method(s)</option>');
+        } else {
+            $('.rule_event').find('option').remove()
+            $.each(model_methods_json[val], function (index, value) {
+                $('.rule_event').append($("<option></option>").attr("value", value).text(value));
+            });
+        }
+    })
 </script>

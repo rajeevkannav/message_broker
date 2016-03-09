@@ -18,18 +18,27 @@ module MessageBroker
 
     def model_list
       Rails.application.eager_load!
-      _list = (ActiveRecord::Base.subclasses.map { |subclass| subclass.to_s unless subclass.to_s.include? 'MessageBroker::' } - [ActiveRecord::SchemaMigration]).compact!
-      _list - ['ActiveRecord::SchemaMigration']
+      _models = (ActiveRecord::Base.subclasses.map { |subclass| subclass.to_s unless subclass.to_s.include? 'MessageBroker::' } - [ActiveRecord::SchemaMigration]).compact!
+      model_methods_pairs = {}
+      (_models - ['ActiveRecord::SchemaMigration']).each do |model|
+        model_methods_pairs.deep_merge!({model.to_sym => instance_methods_list(model)})
+      end
+      puts "model_methods_pairs"
+      puts model_methods_pairs
+
+      model_methods_pairs
     end
 
-    def link_material_icon_to(link, icon_name, text = nil)
-      link_to link do
-        if text.nil?
-          "#{content_tag :i, icon_name, class: "material-icons w3-xxlarge" }".html_safe
-        else
-          "#{content_tag :i, icon_name, class: "material-icons w3-xxlarge" } #{text}".html_safe
-        end
+    def instance_methods_list(model_name)
+      _klass = model_name.safe_constantize
+      _methods = []
+      unless _klass.nil?
+        _methods_with_callback_and_aliased = _klass.public_instance_methods(false) - _klass.singleton_methods(false)
+        _methods_with_aliased = _methods_with_callback_and_aliased.map { |method| method unless method.to_s.include? ('_callback') }.compact
+        _methods = _methods_with_aliased.map { |method| method unless method.to_s.include? ('message_broker_') }.compact
       end
+      _methods
     end
+
   end
 end
