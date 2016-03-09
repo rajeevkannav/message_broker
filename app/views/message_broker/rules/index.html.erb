@@ -1,0 +1,17 @@
+<div class="row">
+  <div id="main-content" class="col-md-12">
+    <h4>Available Rule Set</h4>
+    <div id="rule-index">
+
+    </div>
+    <ul class="list-group">
+      <% if @rules.empty? %>
+          <li id="not-available" class='list-group-item'>No rules available.</li>
+      <% else %>
+          <%= render partial: "message_broker/rules/rule", collection: @rules %>
+      <% end %>
+    </ul>
+    <%= render 'message_broker/rules/form' %>
+  </div>
+</div>
+

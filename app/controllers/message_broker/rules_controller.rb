@@ -5,6 +5,11 @@ module MessageBroker
 
     before_action :set_rule, only: [:edit, :destroy]
 
+    def index
+      @rules = Rule.all
+      @rule = Rule.new
+    end
+
     def create
       @rule = Rule.new(rule_params)
     end

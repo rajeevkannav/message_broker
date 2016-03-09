@@ -4,8 +4,8 @@ module MessageBroker
   class DashboardController < ApplicationController
 
     def dashboard
-      @rules = Rule.all
-      @rule = Rule.new
+      # @rules = Rule.all
+      # @rule = Rule.new
     end
 
     def resource_events
