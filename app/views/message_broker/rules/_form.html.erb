@@ -3,9 +3,9 @@
     <span>Do</span> <%= f.select :activity_id, MessageBroker::Activity.all.collect { |activity| [activity.name, activity.id] },
                                  {include_blank: false} %>
     <span>On</span>
-    <%= f.select :target, [], {:prompt => "Target Class"}, {class: 'rule_target'} %>
+    <%= f.select :target, [], {}, {class: 'rule_target'} %>
     <%= f.select :callback_duration, MessageBroker::CALLBACK_DURATION %>
-    <%= f.select :event, [], {:prompt => "Instance Method(s)"}, {class: 'rule_event'} %>
+    <%= f.select :event, [], {}, {class: 'rule_event'} %>
     <span>On the lapse of</span> <%= f.select :lapse_magnitude, 1..99 %> <%= f.select :lapse_unit, MessageBroker::LAPSE_UNIT %>
     <%= f.submit 'Add Rule' %>
 <% end %>
@@ -13,22 +13,31 @@
 
 <script>
 
+    // Model Selection behaviour
     var model_methods_json = <%= raw model_list.to_json %>;
 
-    $.each(model_methods_json, function (key, value) {
-        $('.rule_target').append($("<option></option>").attr("value", key).text(key));
-    });
+    function class_selection() {
+        $('.rule_target').find('option').remove();
+        $('.rule_target').append('<option value="">Target Class</option>');
+        $.each(model_methods_json, function (key, value) {
+            $('.rule_target').append($('<option></option>').attr("value", key).text(key));
+        });
+    }
 
+    // Methods Selection behaviour
     $('.rule_target').on('change', function () {
-        var val = $('.rule_target').val()
-        if (val == '') {
-            $('.rule_event').find('option').remove();
-            $('.rule_event').append('<option value="">Instance Method(s)</option>');
+        var _this = $(this)
+        var target_obj = _this.parent('form').find('.rule_event')
+        target_obj.find('option').remove();
+        if (_this.val() == '') {
+            target_obj.append('<option value="">Instance Method(s)</option>');
         } else {
-            $('.rule_event').find('option').remove()
-            $.each(model_methods_json[val], function (index, value) {
-                $('.rule_event').append($("<option></option>").attr("value", value).text(value));
+            $.each(model_methods_json[_this.val()], function (index, value) {
+                target_obj.append($("<option></option>").attr("value", value).text(value));
             });
         }
     })
+
+    class_selection();
+    $('.rule_target').trigger('change');
 </script>
