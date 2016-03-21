@@ -1,11 +1,13 @@
-<li id="activity_<%= activity.id %>">
-  <%= activity.name %>
-  <%= link_to "Preview Expand", 'javascript:;', class: "toggle" %> |
-  <%= link_to "Edit", edit_activity_path(activity) %> |
-  <%= link_to "Destroy", activity, method: :delete, remote: true %>
+<div class="panel panel-default">
 
-  <div class="inner">
-    <div class="mail_meta">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      <%= link_to 'Preview', "#collapse#{activity.id}", data: {toggle: 'collapse', parent: '#accordion'} %>
+    </h4>
+  </div>
+
+  <div id="collapse<%= activity.id %>" class="panel-collapse collapse">
+    <div class="panel-body">
       <p><b>From</b> <%= activity.from %></p>
 
       <p><b>To</b> <%= activity.to %></p>
@@ -16,20 +18,9 @@
 
       <p><b>BCC</b> <%= activity.bcc %></p>
     </div>
-    <iframe class="maily_preview" src="<%= activity_path(activity) %>" frameborder="1" height="400" width="100%"></iframe>
+
+    <iframe class="maily_preview" src="<%= activity_path(activity, preview_only: true) %>" frameborder="1" height="400" width="100%"></iframe>
+
   </div>
+</div>
 
-</li>
-
-<script>
-    $('.toggle').on('click', function () {
-        var _link = $(this)
-        $(this).nextUntil(".toggle").filter('.inner').slideToggle(450, function () {
-            if (_link.nextUntil('.toggle').filter('.inner').is(':visible')) {
-                _link.text('Preview Collapse')
-            } else {
-                _link.text('Preview Expand')
-            }
-        });
-    })
-</script>

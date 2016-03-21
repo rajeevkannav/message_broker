@@ -1,8 +1,10 @@
-<%= link_to 'New Activity', new_activity_path %>
-<div class="index">
-  <div class="lines"></div>
-  <ul class="list">
-    <%= render partial: "message_broker/activities/activity", collection: @activities unless @activities.empty? %>
-  </ul>
-</div>
+<%= link_to 'New Activity', new_activity_path, class: 'btn btn-large' %>
 
+<div class="row">
+  <div id="main-content" class="col-md-12">
+    <h4>Available Activities</h4>
+
+      <%= render partial: "message_broker/activities/activity_list", locals: {activities: @activities} %>
+
+  </div>
+</div>

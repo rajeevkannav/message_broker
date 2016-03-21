@@ -13,7 +13,7 @@ module MessageBroker
 
     # GET /activities/1
     def show
-      render text: @activity.template, layout: false
+      render text: @activity.template, layout: false if params[:preview_only]
     end
 
     # GET /activities/new
