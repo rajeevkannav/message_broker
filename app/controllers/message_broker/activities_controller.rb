@@ -5,10 +5,10 @@ module MessageBroker
 
     skip_before_filter :activity_comes_first, :only => [:new, :create]
     before_action :set_activity, only: [:show, :edit, :update, :destroy]
+    before_action :get_activities, only: [:index, :destroy]
 
     # GET /activities
     def index
-      @activities = Activity.all
     end
 
     # GET /activities/1
@@ -54,6 +54,10 @@ module MessageBroker
     # Use callbacks to share common setup or constraints between actions.
     def set_activity
       @activity = Activity.find(params[:id])
+    end
+
+    def get_activities
+      @activities = Activity.all
     end
 
     # Only allow a trusted parameter "white list" through.

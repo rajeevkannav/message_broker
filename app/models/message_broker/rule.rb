@@ -8,7 +8,7 @@ module MessageBroker
     validates_presence_of :lapse_unit, in: MessageBroker::LAPSE_UNIT
 
     # Associations
-    belongs_to :activity
+    belongs_to :activity, dependent: :destroy
 
   end
 end

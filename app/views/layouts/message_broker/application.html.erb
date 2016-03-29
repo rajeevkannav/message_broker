@@ -14,35 +14,13 @@
 
 <div id="main-container" class="container">
 
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <%= link_to('MessageBroker', root_path, class: 'navbar-brand') %>
-        <ul class="nav navbar-nav">
-          <li class="active"><%= link_to('Rules', rules_path) %></li>
-          <li><%= link_to('Activities', activities_path) %></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <%= render :partial => "message_broker/shared/header" %>
 
   <div class="container">
     <%= render :partial => "message_broker/shared/flash_messages", :locals => {:flash => flash} %>
     <%= yield %>
   </div>
-
-  <footer class="footer">
-    <div class="container">
-      <p>
-        Developed at <%= link_to('Headerlabs', 'http://www.headerlabs.com/') %>
-        developed by <%= link_to 'Rajeev Kannav Sharma', 'http://rajeevkannav.github.io/' %>
-        authored by <%= link_to 'Praveen Kumar Sinha', 'http://anaphoral.blogspot.in/' %>
-        and code licensed under <%= link_to('MIT', 'https://opensource.org/licenses/MIT') %>.
-      </p>
-    </div>
-  </footer>
-
+  <%= render :partial => "message_broker/shared/footer" %>
 </div>
 </body>
 </html>

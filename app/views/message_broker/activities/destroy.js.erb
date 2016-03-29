@@ -1,1 +1,2 @@
-$("#activity_<%= @activity.id %>").remove();
+$("#activity-index").html('<%= j render(:partial => 'message_broker/activities/activity_list', locals: {activities: @activities })%>');
+
