@@ -4,7 +4,7 @@
     <h4 class="panel-title">
       <%= link_to "#{activity.name}", "#collapse#{activity.id}", data: {toggle: 'collapse', parent: '#accordion'} %>
       <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), edit_activity_path(activity) %>
-      <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-trash'), activity, method: :delete, data: {confirm: "Are you sure?"}, remote: true %>
+      <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-trash'), activity, method: :delete, data: {confirm: "Associated Rule(s) will also be deleted. Are you sure?"}, remote: true %>
     </h4>
   </div>
 

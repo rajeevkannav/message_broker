@@ -9,7 +9,7 @@ module MessageBroker
     validates :to, format: {with: COMMA_SEPARATED_EMAILS, message: "#{attr} must consist of valid email addresses only."}
 
     validates_each :cc, :bcc, allow_blank: true do |record, attr, value|
-      record.errors.add attr, "#{attr} must consist of valid email addresses only." unless value =~ COMMA_SEPARATED_EMAILS
+      record.errors.add attr, "must consist of valid email addresses only." unless value =~ COMMA_SEPARATED_EMAILS
     end
 
     # Associations
