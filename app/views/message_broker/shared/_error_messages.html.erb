@@ -1,8 +1,11 @@
 <% if object.errors.any? %>
-    <h4><%= pluralize(object.errors.count, "error") %> prohibited this rule from being saved:</h4>
-    <ul>
-      <% object.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-      <% end %>
-    </ul>
+    <div class="alert alert-warning fade in">
+      <button class="close" data-dismiss="alert">×</button>
+      <h4><%= pluralize(object.errors.count, "error") %> prohibited this rule from being saved:</h4>
+      <ul>
+        <% object.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
 <% end %>

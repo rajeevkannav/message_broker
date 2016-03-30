@@ -2,18 +2,19 @@ module MessageBroker
   module ApplicationHelper
 
     def bootstrap_class_for flash_type
-      case flash_type
-        when :success
-          "alert-success"
-        when :error
-          "alert-error"
-        when :alert
-          "alert-block"
-        when :notice
-          "alert-info"
-        else
-          flash_type.to_s
-      end
+      alert_class_type = case flash_type.to_sym
+                           when :notice
+                             'alert-info'
+                           when :success
+                             'alert-success'
+                           when :error
+                             'alert-danger'
+                           when :alert
+                             "alert-warning"
+                           else
+                             flash_type.to_s
+                         end
+      alert_class_type
     end
 
     def model_list

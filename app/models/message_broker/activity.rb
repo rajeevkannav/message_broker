@@ -1,20 +1,18 @@
 module MessageBroker
   class Activity < ActiveRecord::Base
 
-    # Saving arrays objects in text columns
-    # serialize :to, Array
-    # serialize :bcc, Array
-    # serialize :cc, Array
-
     # Validations
-    validates_presence_of :name, :to, :from, :subject, :template
-    has_many :message_broker_rules, :class_name => 'MessageBroker::Rule', dependent: :destroy
+    validates :name, :subject, :template, :to, :from, presence: true
 
-    # before_save :test_run
-    #
-    # private
-    # def test_run
-    #   self.template = self.template.html_safe
-    # end
+    COMMA_SEPARATED_EMAILS = /(\A([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,})(,\s*([\w\.%\+\-]+)@([\w\-]+\.)+([\w]{2,}))*\z)/i
+    validates :from, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "%{value} is not an email."}
+    validates :to, format: {with: COMMA_SEPARATED_EMAILS, message: "#{attr} must consist of valid email addresses only."}
+
+    validates_each :cc, :bcc, allow_blank: true do |record, attr, value|
+      record.errors.add attr, "#{attr} must consist of valid email addresses only." unless value =~ COMMA_SEPARATED_EMAILS
+    end
+
+    # Associations
+    has_many :message_broker_rules, :class_name => 'MessageBroker::Rule', dependent: :destroy
   end
 end

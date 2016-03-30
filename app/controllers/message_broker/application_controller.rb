@@ -6,7 +6,7 @@ module MessageBroker
     private
 
     def activity_comes_first
-      redirect_to new_activity_path, :flash => {:error => "Let's create an activity first."} if Activity.count.zero?
+      redirect_to new_activity_path, :flash => {:notice => "Let's create an activity first."} if Activity.count.zero?
     end
   end
 end

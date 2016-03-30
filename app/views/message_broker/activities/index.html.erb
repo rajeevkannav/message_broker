@@ -1,7 +1,10 @@
-<%= link_to 'New Activity', new_activity_path, class: 'btn btn-large' %>
 <div class="row">
   <div id="main-content" class="col-md-12">
-    <h4>Available Activities</h4>
+    <h4>
+      Available Activities
+      <span class="pull-right"> <%= link_to 'New Activity', new_activity_path, class: 'btn btn-large' %></span>
+    </h4>
+
     <div id="activity-index">
       <%= render partial: "message_broker/activities/activity_list", locals: {activities: @activities} %>
     </div>
