@@ -23,9 +23,9 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'actionmailer', '~> 4.2'
   s.add_runtime_dependency 'jquery-rails', '~> 3.1'
   s.add_runtime_dependency 'bootstrap-sass', '~> 3.2'
-  s.add_runtime_dependency 'sass-rails'
-  s.add_runtime_dependency "sidekiq"
+  s.add_runtime_dependency 'sass-rails', '~> 5.0'
+  s.add_runtime_dependency "sidekiq", '~> 4.1'
 
-  s.add_development_dependency "sqlite3"
-  s.add_development_dependency 'sinatra'
+  s.add_development_dependency "sqlite3", '~> 1.3'
+  s.add_development_dependency 'sinatra', '~> 1.4'
 end
