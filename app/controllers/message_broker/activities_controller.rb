@@ -63,13 +63,7 @@ module MessageBroker
     # Only allow a trusted parameter "white list" through.
     def activity_params
       params.require(:activity).permit(
-          :name,
-          :subject,
-          :template,
-          :from,
-          :to,
-          :bcc,
-          :cc
+          :name, :subject, :template, :from, :to, :bcc, :cc
       )
     end
 

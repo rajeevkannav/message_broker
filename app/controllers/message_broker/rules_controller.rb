@@ -3,7 +3,7 @@ require_dependency "message_broker/application_controller"
 module MessageBroker
   class RulesController < ApplicationController
 
-    before_action :set_rule, only: [:edit, :destroy]
+    before_action :set_rule, only: [:edit, :update, :destroy]
     before_action :get_rules, only: [:index, :create, :destroy]
 
     def index
@@ -15,6 +15,10 @@ module MessageBroker
     end
 
     def edit
+    end
+
+    def update
+      @rule.update(rule_params)
     end
 
     def destroy
