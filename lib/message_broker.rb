@@ -1,19 +1,15 @@
 ### Engine - External dependency
-## To Ajax call UI
-require 'jquery-rails'
-## To Load AR classes and operate
+require 'rails'
 require 'active_record'
+require 'action_mailer'
+require 'jquery-rails' ## To Ajax call UI
 require 'bootstrap-sass'
-## To email
-require 'mail'
-## To have delay and Queue to Messaging Server
-require 'sidekiq'
+require 'sidekiq' ## To have delay and Queue to Messaging Server
+
 ### Engine level dependency
-## access rails define_model_callbacks, set_callback
-require 'active_support/callbacks'
-## inject MessageBroker::Engine to accessing application
-require "message_broker/injector"
-## default
+
+require 'active_support/callbacks' ## access rails define_model_callbacks, set_callback
+require "message_broker/injector" ## inject MessageBroker::Engine to accessing application
 require "message_broker/engine"
 
 module MessageBroker

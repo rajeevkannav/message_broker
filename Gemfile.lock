@@ -1,13 +1,12 @@
 PATH
   remote: .
   specs:
-    message_broker (0.0.1)
-      actionmailer
-      activerecord
-      autoprefixer-rails
-      bootstrap-sass (~> 3.2.0)
-      jquery-rails (~> 3.1.1)
-      rails (~> 4.2.5.1)
+    message_broker (0.0.0)
+      actionmailer (~> 4.2)
+      activerecord (~> 4.2)
+      bootstrap-sass (~> 3.2)
+      jquery-rails (~> 3.1)
+      rails (~> 4.2)
       sass-rails
       sidekiq
 
@@ -52,8 +51,9 @@ GEM
     arel (6.0.3)
     autoprefixer-rails (6.3.3.1)
       execjs
-    bootstrap-sass (3.2.0.2)
-      sass (~> 3.2)
+    bootstrap-sass (3.3.6)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
     builder (3.2.2)
     concurrent-ruby (1.0.1)
     connection_pool (2.2.0)
