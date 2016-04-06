@@ -23,21 +23,59 @@ respond to life cycle callbacks to implement trigger-like behavior. Simply drop-
     :queues:
       - default
       - [mailers, 2]
-5. (Re-)boot application and `rails s`
-6. Create some rules. checkout `/message_broker`
-7. Create some activities checkout `/message_broker/activities`
-8. Play safely(under-development)!
 
 
+#### Instruction set
 
-## Dependencies
+*   Add this line to your application's Gemfile: `gem 'message_broker'`
+    *   For every model
+        ##### Make a file message_broker.rb in Rails.root/config/initializers
+        Rails.application.eager_load!
+        ActiveRecord::Base.descendants.each do |descendant|
+            descendant.send(:include, MessageBroker::Injector)
+        end
 
-  * "rails", "~> 4.2.5.1"
-  * "jquery-rails", "~> 3.1.1"
-  * "activerecord"
-  * "sidekiq" # maybe
-  * "mail" # maybe
+    * For selective Models
+        class ModelName < ActiveRecord::Base
+            include MessageBroker::Injector
+        end
 
+*   And then run: `bundle install`
+*   Add initializer file with content (All existing models needs to have MessageBroker).
+
+    <pre>Rails.application.eager_load!
+    ActiveRecord::Base.descendants.each do |descendant|
+        descendant.send(:include, MessageBroker::Injector)
+    end
+                </pre>
+
+* add this line to routes `mount MessageBroker::Engine => "/message_broker"`
+*   Use a queueing backend to enqueue MessageBroker jobs in the future. Example configuration(s) for sidekiq given
+
+    config.active_job.queue_adapter = :sidekiq # to config/application.rb and configure your config/sidekiq.yml as given below
+
+    ---
+    :concurrency: 5
+    :pidfile: tmp/pids/sidekiq.pid
+    staging:
+      :concurrency: 10
+    production:
+      :concurrency: 20
+    :queues:
+      - default
+      - [mailers, 2]
+
+    bundle exec sidekiq -C config/sidekiq.yml
+    
+*   Configure Mailer settings for your application.
+
+ *   (Re-)boot application.
+
+#### Usage/How to use
+
+1. Create some activities checkout `/message_broker/activities`
+2. Create some rules. checkout `/message_broker`
+3. Play safely(under-development)!
 
 ## Contributing
 

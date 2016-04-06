@@ -3,7 +3,7 @@ class CreateMessageBrokerRules < ActiveRecord::Migration
     create_table :message_broker_rules do |t|
       t.string :target
       t.string :event
-      t.belongs_to :activity, index: true, foreign_key: true
+      t.belongs_to :activity, index: true
       t.string :callback_duration
       t.integer :lapse_magnitude
       t.string :lapse_unit
