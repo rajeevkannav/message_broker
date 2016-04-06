@@ -2,6 +2,8 @@
 
 respond to life cycle callbacks to implement trigger-like behavior. Simply drop-in the app and go!
 
+[![GitHub version](https://badge.fury.io/gh/rajeevkannav%2Fmessage_broker.svg)](https://badge.fury.io/gh/rajeevkannav%2Fmessage_broker)
+
 ## Installation
 
 1. add to your `Gemfile` ->  `'message_broker'`.
