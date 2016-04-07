@@ -8,9 +8,9 @@ module MessageBroker
 
     # Validations
     validates :target, :event, :activity, :callback_duration, :lapse_magnitude, :lapse_unit, presence: true
-    validates_inclusion_of :callback_duration, in: MessageBroker::Rule::CALLBACK_DURATION, message: "value %{value} is not included in the list"
-    validates_inclusion_of :lapse_magnitude, in: MessageBroker::Rule::LAPSE_MAGNITUDE, message: "value %{value} is not included in the list"
-    validates_inclusion_of :lapse_unit, in: MessageBroker::Rule::LAPSE_UNIT, message: "value %{value} is not included in the list"
+    validates :callback_duration, inclusion: {in: MessageBroker::Rule::CALLBACK_DURATION, message: "value %{value} is not included in the list"}
+    validates :lapse_magnitude, inclusion: {in: MessageBroker::Rule::LAPSE_MAGNITUDE, message: "value %{value} is not included in the list"}
+    validates :lapse_unit, inclusion: {in: MessageBroker::Rule::LAPSE_UNIT, message: "value %{value} is not included in the list"}
 
     # Associations
     belongs_to :activity

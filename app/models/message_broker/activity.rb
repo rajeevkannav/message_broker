@@ -13,6 +13,6 @@ module MessageBroker
     end
 
     # Associations
-    has_many :message_broker_rules, :class_name => 'MessageBroker::Rule', dependent: :destroy
+    has_many :message_broker_rules, class_name: 'MessageBroker::Rule', dependent: :destroy
   end
 end
