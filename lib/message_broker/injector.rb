@@ -7,10 +7,9 @@ module MessageBroker
       base.instance_eval do
 
         def applicable_methods
-          available_methods = public_instance_methods(false) - singleton_methods(false)
-          available_methods.collect do |a_method|
+          (public_instance_methods(false) - singleton_methods(false)).select do |a_method|
             a_method unless (a_method.to_s.ends_with?('_callbacks') || a_method.to_s.starts_with?('message_broker_'))
-          end.compact
+          end
         end
 
       end
