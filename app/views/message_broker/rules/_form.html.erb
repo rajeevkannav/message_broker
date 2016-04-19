@@ -4,7 +4,7 @@
                                  {include_blank: false} %>
     <span>On</span>
     <%= f.select :target, [], {}, {class: 'rule_target'} %>
-    <%= f.select :callback_duration, MessageBroker::Rule::CALLBACK_DURATION %>
+    <%= f.select :callback_duration, MessageBroker::Rule::CALLBACK_TYPE %>
     <%= f.select :event, [], {}, {class: 'rule_event'} %>
     <span>On the lapse of</span> <%= f.select :lapse_magnitude, 1..99 %> <%= f.select :lapse_unit, MessageBroker::Rule::LAPSE_UNIT %>
     <%= f.submit (@rule.new_record? ? 'Add Rule' : 'Update Rule') %>
