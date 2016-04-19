@@ -1,6 +1,6 @@
 <li id='rule_<%= rule.id %>' class='list-group-item'>
   <%= (rule_counter + 1) %>. do <i><%= link_to rule.activity.name, activity_path(rule.activity) %></i> on
-  <i><%= rule.target %></i> <i><%= rule.callback_duration %></i>
+  <i><%= rule.target %></i> <i><%= rule.callback_type %></i>
   <i><%= rule.event %></i> on the lapse of <i><%= rule.lapse_magnitude %></i> <i><%= rule.lapse_unit %>.</i>
   <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), edit_rule_path(rule), remote: true %>
   <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-trash'), rule, method: :delete, data: {confirm: "Are you sure?"}, remote: true %>

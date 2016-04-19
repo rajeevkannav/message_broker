@@ -1,27 +1,12 @@
 module MessageBroker
   module ApplicationHelper
 
-    #Fixme : Poor Code.
-    def model_list
+    def model_methods_list
       Rails.application.eager_load!
-      _models = (ActiveRecord::Base.subclasses.map { |subclass| subclass.to_s unless subclass.to_s.include? 'MessageBroker::' } - [ActiveRecord::SchemaMigration]).compact!
-      model_methods_pairs = {}
-      (_models - ['ActiveRecord::SchemaMigration']).each do |model|
-        model_methods_pairs.deep_merge!({model.to_sym => instance_methods_list(model)})
-      end
-      model_methods_pairs
-    end
-
-    #Fixme : Poor Code.
-    def instance_methods_list(model_name)
-      _klass = model_name.safe_constantize
-      _methods = []
-      unless _klass.nil?
-        _methods_with_callback_and_aliased = _klass.public_instance_methods(false) - _klass.singleton_methods(false)
-        _methods_with_aliased = _methods_with_callback_and_aliased.map { |method| method unless method.to_s.include? ('_callback') }.compact
-        _methods = _methods_with_aliased.map { |method| method unless method.to_s.include? ('message_broker_') }.compact
-      end
-      _methods
+      model_array = ActiveRecord::Base.subclasses.select do |subclass|
+        subclass unless subclass.to_s.start_with? 'MessageBroker::'
+      end - [ActiveRecord::SchemaMigration]
+      Hash[model_array.map { |model| [model.to_s, model.applicable_methods.to_a] }]
     end
 
     def active_class(link_path)

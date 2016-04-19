@@ -4,6 +4,17 @@ module MessageBroker
 
     def self.included base
 
+      base.instance_eval do
+
+        def applicable_methods
+          available_methods = public_instance_methods(false) - singleton_methods(false)
+          available_methods.collect do |a_method|
+            a_method unless (a_method.to_s.ends_with?('_callbacks') || a_method.to_s.starts_with?('message_broker_'))
+          end.compact
+        end
+
+      end
+
       base.class_eval do
         instance_methods(false).each do |im|
 
@@ -30,9 +41,9 @@ module MessageBroker
 
     end
 
-    def message_broker_adjustments(event, callback_t)
+    def message_broker_adjustments(event, callback_type)
 
-      MessageBroker::Rule.where(target: self.class.to_s).where(event: event).where(callback_duration: callback_t).each do |mb_rule|
+      MessageBroker::Rule.where(target: self.class.to_s).where(event: event).where(callback_type: callback_type).each do |mb_rule|
 
         ActionMailer::Base.mail(
             from: mb_rule.activity.from,
