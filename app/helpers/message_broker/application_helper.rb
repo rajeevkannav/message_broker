@@ -6,7 +6,7 @@ module MessageBroker
       model_array = ActiveRecord::Base.subclasses.select do |subclass|
         subclass unless subclass.to_s.start_with? 'MessageBroker::'
       end - [ActiveRecord::SchemaMigration]
-      Hash[model_array.map { |model| [model.to_s, model.applicable_methods.to_a] }]
+      Hash[model_array.map { |model| [model.name, model.applicable_methods.to_a] }]
     end
 
     def active_class(link_path)

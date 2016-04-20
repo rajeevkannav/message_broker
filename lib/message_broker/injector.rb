@@ -17,20 +17,20 @@ module MessageBroker
       base.class_eval do
         instance_methods(false).each do |im|
 
-          define_model_callbacks im.to_sym # define all available callback methods
+          define_model_callbacks im # define all available callback methods
 
-          set_callback im.to_sym, :before do
+          set_callback im, :before do
             message_broker_adjustments(im, :before)
           end
 
-          set_callback im.to_sym, :after do
+          set_callback im, :after do
             message_broker_adjustments(im, :after)
           end
 
           alias_method "message_broker_#{im}", im
 
-          define_method "#{im}" do |*args|
-            run_callbacks im.to_sym do
+          define_method im do |*args|
+            run_callbacks im do
               send("message_broker_#{im}", *args)
             end
           end
@@ -42,7 +42,7 @@ module MessageBroker
 
     def message_broker_adjustments(event, callback_type)
 
-      MessageBroker::Rule.where(target: self.class.to_s).where(event: event).where(callback_type: callback_type).each do |mb_rule|
+      MessageBroker::Rule.where(target: self.class.name).where(event: event).where(callback_type: callback_type).each do |mb_rule|
 
         ActionMailer::Base.mail(
             from: mb_rule.activity.from,
